@@ -30,12 +30,11 @@ Both skills check for missing tools and print install instructions automatically
 ## Installation
 
 ```bash
-# Via Claude Code plugin marketplace
-/install claude-usage-toolkit
+# Add the marketplace (once)
+claude plugin marketplace add https://github.com/csbproserve/claude-usage-toolkit
 
-# Or local install
-git clone https://github.com/csbproserve/claude-usage-toolkit
-# Add to Claude Code settings as a local plugin
+# Then install the plugin
+claude plugin install claude-usage-toolkit
 ```
 
 ## Multi-Machine Workflow
