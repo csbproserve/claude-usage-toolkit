@@ -51,13 +51,12 @@ git log --oneline --since="YYYY-MM-DD" --until="YYYY-MM-DD" \
 Use a subagent to parallelize across many repos. Skip worktree variants (`.arc`, `.fw`, etc.).
 
 ### 3. Session history
-Session files live at `~/.claude/projects/<encoded-path>/*.jsonl`. Each file is one session; file mtime indicates when it was active.
 
-```bash
-ls -la ~/.claude/projects/<dir>/*.jsonl
-```
+**Preferred:** If a `sessions-summary.json` was produced by `summarize-sessions.sh`, read that file directly. Each entry contains: `date`, `project`, `first_message`, `last_message`, `human_messages` (all, truncated), `tool_calls`, `message_count`, and `needs_investigation`.
 
-For files with mtimes in the target window, read the first few human messages to infer the topic. **Only report sessions with meaningful work** — skip `/clear`-only sessions.
+For sessions where `needs_investigation: true`, read the raw JSONL file to determine content and value. The path is `~/.claude/projects/<encoded-project-path>/<session_id>*.jsonl` — match on `session_id` prefix. Only do this for flagged sessions; for all others use the summary.
+
+**Fallback (no summary file):** Session files live at `~/.claude/projects/<encoded-path>/*.jsonl`. Use file mtime to filter by date range, then read only the first few lines of each file to infer the topic. Skip `/clear`-only sessions.
 
 ## Report Structure
 

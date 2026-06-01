@@ -111,7 +111,39 @@ echo "Run ccusage against merged data:"
 echo "  CLAUDE_CONFIG_DIR=$MERGED_DIR ccusage weekly --json"
 ```
 
-## Step 3: Run ccusage Against Merged Data
+## Step 3: Summarize Sessions (run on reporting host)
+
+Before generating the report, process the raw JSONL files into a compact summary. This avoids having Claude churn through MB of raw conversation text during report generation.
+
+```bash
+bash $CLAUDE_PLUGIN_ROOT/skills/claude-usage-collect/scripts/summarize-sessions.sh \
+  --since 2026-04-13 \
+  --until 2026-05-19 \
+  --dir ~/.claude-merged
+```
+
+Output: `sessions-summary.json` in the current directory — one entry per session:
+```json
+[
+  {
+    "session_id": "cfb1852f",
+    "date": "2026-04-27",
+    "project": "Documents/git-repos/cspire-launchdeck/launchdeck-bootcamp",
+    "message_count": { "human": 42, "assistant": 41 },
+    "first_message": "Let's build the Day 1 bootcamp deck...",
+    "last_message": "PDF exports committed, all four decks done.",
+    "human_messages": ["Let's build the Day 1 bootcamp deck...", "..."],
+    "tool_calls": ["Bash: git commit -m ...", "Write: slides/day1.md", "Agent: build Day 2 deck"],
+    "needs_investigation": false
+  }
+]
+```
+
+`needs_investigation: true` is set automatically for sessions where the messages are too sparse, too short, or too generic to determine value from the summary alone. Claude reads raw JSONL only for those sessions.
+
+Pass the path to this file to the `claude-usage-report` skill.
+
+## Step 4: Run ccusage Against Merged Data
 
 ```bash
 CLAUDE_CONFIG_DIR=~/.claude-merged ccusage weekly --json
@@ -148,6 +180,7 @@ When running the `claude-usage-report` skill, tell it to use the merged data dir
 | Collect (each machine) | `./collect-bundle.sh --since 2026-04-13 --until 2026-05-19` |
 | Transfer | `scp bundle.tar.gz user@host:~/bundles/` |
 | Merge | `./merge-bundles.sh ~/bundles/*.tar.gz` |
-| Verify | `CLAUDE_CONFIG_DIR=~/.claude-merged ccusage weekly` |
-| Report | Run `claude-usage-report` skill with merged dir |
-| Cleanup | `rm -rf ~/.claude-merged` |
+| Summarize sessions | `bash summarize-sessions.sh --since ... --until ... --dir ~/.claude-merged` |
+| Verify spend | `CLAUDE_CONFIG_DIR=~/.claude-merged ccusage weekly` |
+| Report | Run `claude-usage-report` skill, pass `sessions-summary.json` path |
+| Cleanup | `rm -rf ~/.claude-merged sessions-summary.json` |
