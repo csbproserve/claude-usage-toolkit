@@ -20,9 +20,11 @@ if ! which scc &>/dev/null; then
   elif which go &>/dev/null; then
     go install github.com/boyter/scc/v3@latest
   else
-    # Linux direct binary
+    # Linux direct binary — install to ~/.local/bin (user-writable)
+    mkdir -p ~/.local/bin
     curl -L "https://github.com/boyter/scc/releases/latest/download/scc_Linux_x86_64.tar.gz" \
-      | tar xz -C /usr/local/bin scc
+      | tar xz -C ~/.local/bin scc
+    export PATH="$HOME/.local/bin:$PATH"
   fi
 fi
 ```
