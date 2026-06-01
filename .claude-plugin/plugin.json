@@ -1,6 +1,6 @@
 {
   "name": "claude-usage-toolkit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Weekly Claude Code usage reports: correlate spend with git commits, session history, COCOMO value, and hours saved. Supports multi-machine data collection.",
   "author": {
     "name": "csbproserve",
