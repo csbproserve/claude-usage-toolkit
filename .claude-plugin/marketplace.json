@@ -1,0 +1,25 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-usage-toolkit",
+  "description": "Weekly Claude Code usage reports: correlate spend with git commits, session history, COCOMO value, and hours saved.",
+  "owner": {
+    "name": "csbproserve",
+    "email": "jeremypng@users.noreply.github.com"
+  },
+  "plugins": [
+    {
+      "name": "claude-usage-toolkit",
+      "description": "Weekly Claude Code usage reports correlating ccusage spend with git commits, Claude session history, COCOMO development value estimates, and hours saved. Supports collecting data from multiple workstations (AVD, Linux jump host, local Mac) and merging into a single portable bundle for report generation.",
+      "author": {
+        "name": "csbproserve",
+        "url": "https://github.com/csbproserve"
+      },
+      "category": "productivity",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/csbproserve/claude-usage-toolkit.git"
+      },
+      "homepage": "https://github.com/csbproserve/claude-usage-toolkit"
+    }
+  ]
+}
