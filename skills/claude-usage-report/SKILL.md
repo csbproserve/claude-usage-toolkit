@@ -17,6 +17,16 @@ If sessions are spread across multiple workstations (AVD, Linux jump host, local
 
 Then substitute `CLAUDE_CONFIG_DIR=~/.claude-merged` in all ccusage commands and scan `~/.claude-merged/projects/` for session history instead of `~/.claude/projects/`.
 
+## Prerequisites
+
+Check for `ccusage` before running — install if missing:
+
+```bash
+if ! which ccusage &>/dev/null; then
+  npm install -g ccusage
+fi
+```
+
 ## Data Sources
 
 ### 1. Spend data

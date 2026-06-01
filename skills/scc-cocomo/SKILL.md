@@ -11,8 +11,20 @@ Uses `scc` (Sloc Cloc and Code) to estimate what committed code would cost to pr
 
 ## Prerequisites
 
+Check for `scc` before running — install if missing:
+
 ```bash
-brew install scc   # or: go install github.com/boyter/scc/v3@latest
+if ! which scc &>/dev/null; then
+  if which brew &>/dev/null; then
+    brew install scc
+  elif which go &>/dev/null; then
+    go install github.com/boyter/scc/v3@latest
+  else
+    # Linux direct binary
+    curl -L "https://github.com/boyter/scc/releases/latest/download/scc_Linux_x86_64.tar.gz" \
+      | tar xz -C /usr/local/bin scc
+  fi
+fi
 ```
 
 ## Key Parameters

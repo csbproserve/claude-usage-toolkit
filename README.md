@@ -21,9 +21,11 @@ Runs `scc` against files committed by a specific author across multiple repos to
 
 ## Prerequisites
 
-- [`ccusage`](https://github.com/ryoppippi/ccusage) — `npm install -g ccusage`
-- [`scc`](https://github.com/boyter/scc) — `brew install scc` (for COCOMO skill only)
+- [`ccusage`](https://github.com/ryoppippi/ccusage) — `npm install -g ccusage` (required for usage-report)
+- [`scc`](https://github.com/boyter/scc) — `brew install scc` or `go install github.com/boyter/scc/v3@latest` (required for scc-cocomo only)
 - `jq` — `brew install jq`
+
+Both skills check for missing tools and print install instructions automatically before running.
 
 ## Installation
 
