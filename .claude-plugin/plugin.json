@@ -1,7 +1,7 @@
 {
   "name": "claude-usage-toolkit",
-  "version": "0.2.0",
-  "description": "Weekly Claude Code usage reports: correlate spend with git commits, session history, COCOMO value, and hours saved. Supports multi-machine data collection.",
+  "version": "0.3.0",
+  "description": "Claude Code usage reports and executive summaries: correlate spend with git commits, session history, COCOMO value, and hours saved; then turn it into a credible, executive-ready write-up. Supports multi-machine data collection.",
   "author": {
     "name": "csbproserve",
     "email": "jeremypng@users.noreply.github.com",
@@ -10,5 +10,5 @@
   "homepage": "https://github.com/csbproserve/claude-usage-toolkit",
   "repository": "https://github.com/csbproserve/claude-usage-toolkit",
   "license": "MIT",
-  "keywords": ["usage", "reporting", "cocomo", "roi", "cost", "git", "ccusage"]
+  "keywords": ["usage", "reporting", "cocomo", "roi", "cost", "git", "ccusage", "executive", "hours-saved"]
 }
